@@ -22,6 +22,8 @@
 	
 	require("RUnit", quietly=TRUE) || stop("RUnit package not found")
 	RUnit_opts <- getOption("RUnit", list())
+	RUnit_opts$verbose <- 0L
+	RUnit_opts$silent <- TRUE
 	
 	RUnit_opts$verbose_fail_msg <- TRUE
 	options(RUnit = RUnit_opts)

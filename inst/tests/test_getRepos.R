@@ -7,7 +7,7 @@
 		function()
 {
 	oldRepos <- getOption("repos")
-	save(file.path(tempdir(), "oldRepos.Rbin"))
+	save(oldRepos, file = file.path(tempdir(), "oldRepos.Rbin"))
 }
 
 .tearDown <-
@@ -16,7 +16,7 @@
 	load(file.path(tempdir(), "oldRepos.Rbin"))
 	options(oldRepos)
 	rm(oldRepos)
-	file.remove(file.path(tempdir(), "oldRepos.Rbin"))
+	unlink(file.path(tempdir(), "oldRepos.Rbin"))
 }
 
 unitTestGetReposCRANnotSet <-
@@ -26,7 +26,8 @@ unitTestGetReposCRANnotSet <-
 	repos <- getRepos()
 	
 	checkTrue(length(repos) > 1)
-	checkTrue(getOption("repos")[["CRAN"]] != "@CRAN@")
+	checkTrue(repos[["CRAN"]] != "@CRAN@")
+	checkEquals(getOption("repos")[["CRAN"]], "@CRAN@")
 	
 }
 
@@ -36,9 +37,9 @@ unitTestGetReposCRANSet <-
 	options(repos=c(CRAN="aFakeUrl"))
 	repos <- getRepos()
 	
-	checkEqual(length(repos[["CRAN"]], 1L))
-	checkEqual(repos[["CRAN"]], "aFakeUrl")
-	checkEqual(getOption("repos")[["CRAN"]], "aFakeUrl")
+	checkEquals(length(repos[["CRAN"]]), 1L)
+	checkEquals(repos[["CRAN"]], "aFakeUrl")
+	checkEquals(getOption("repos")[["CRAN"]], "aFakeUrl")
 }
 
 unitTestGetReposUserSetExtraRepos <-
@@ -47,9 +48,9 @@ unitTestGetReposUserSetExtraRepos <-
 	options(repos=c(CRAN="aFakeUrl", anotherOne="anotherFakeURL"))
 	repos <- getRepos()
 	
-	checkEqual(length(repos[["CRAN"]], 2L))
-	checkTrue(all(c("aFakeUrl", "anotherFakeURL") %in% repos[["CRAN"]]))
-	checkTrue(all(c("aFakeUrl", "anotherFakeURL") %in% getOption("repos")))
-	
+	checkTrue(all(c("CRAN", "anotherOne") %in% names(getOption("repos"))))
+	checkEquals(length(repos[["CRAN"]]), 1L)
+	checkEquals("aFakeUrl", repos[["CRAN"]])
+	checkEquals("anotherFakeURL", repos[["anotherOne"]])	
 }
 

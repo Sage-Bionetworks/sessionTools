@@ -10,10 +10,15 @@ getRepos <-
 	repos <- tryCatch(
 			BiocInstaller::biocinstallRepos(),
 			error = function(e){
-				suppressMessages(local({
-					source("http://bioconductor.org/biocLite.R")
-				}))
-				
+				file <- file(tempfile(), open="wt")
+				sink(file, type="message")
+				tryCatch(
+						local(source("http://bioconductor.org/biocLite.R")),
+						finally={
+							sink()
+							unlink(file)
+						}
+				)
 				repos <- BiocInstaller::biocinstallRepos()
 				unloadNamespace("BiocInstaller")
 				remove.packages("BiocInstaller")
@@ -30,5 +35,4 @@ getRepos <-
 	rVersion <- paste(R.Version()$major, as.integer(R.Version()$minor), sep=".")
 	sageRepos <- paste("http://sage.fhcrc.org/CRAN/prod", rVersion, sep="/")
 	repos <- c(repos, SageBio=sageRepos)
-	
 }

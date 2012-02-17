@@ -14,7 +14,7 @@
 .tearDown <-
 		function()
 {
-	load("oldOpts.Rbin")
+	load(file=file.path(tempdir(), "oldOpts.Rbin"))
 	options(oldOpts)
 	rmOpts <- setdiff(names(options()), names(oldOpts))
 	opt <- list(aName=NULL)
@@ -37,7 +37,7 @@ unitTestRestoreOptions <-
 	restoreOptions(sessionInfo)
 	
 	checkTrue(all(getOption("repos") == c(CRAN="aFakeCranRepo", SageBio="aFakeLranRepo")))
-	checkEqual(length(options()), length(oldOpts))
+	checkEquals(length(options()), length(oldOpts))
 	checkTrue(all(names(oldOpts) %in% names(options())))
 }
 
@@ -53,7 +53,7 @@ unitTestRestoreOptionsMoreOpts <-
 	restoreOptions(sessionInfo)
 	
 	checkTrue(all(getOption("repos") == c(CRAN="aFakeCranRepo", SageBio="aFakeLranRepo")))
-	checkEqual(length(options()), length(oldOpts) + 1)
+	checkEquals(length(options()), length(oldOpts) + 1)
 	checkTrue(all(names(oldOpts) %in% names(options())))
 	
 	## make sure otherOpt has it's original value
