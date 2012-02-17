@@ -1,6 +1,5 @@
-\name{isAvailable}
-\alias{isAvailable}
-%- Also NEED an '\alias' for EACH other topic documented here.
+\name{isPkgAvailable}
+\alias{isPkgAvailable}
 \title{
 	Check Availability of R Packages
 }
@@ -9,23 +8,20 @@
 	indicating whether the package is found.
 }
 \usage{
-isAvailable(pkg, repos = getOption("repos"), version)
+	isPkgAvailable(pkg, repos = getOption("repos"), version)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{pkg}{
 	package names. Either a single string or an array of strings.
 }
   \item{repos}{
-	Respoitories to search.
+	Repositories to search.
 }
   \item{version}{
 	The specific package version. Currently ignored.
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
 	Boolean indicating whether the package is available. One boolean for each package
 	name provided.

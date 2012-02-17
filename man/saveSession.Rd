@@ -1,6 +1,5 @@
 \name{saveSession}
 \alias{saveSession}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 	Save an R Session
 }
@@ -11,7 +10,6 @@
 \usage{
 saveSession(file = "session.RData", ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{file}{
 	File where the session should be stored

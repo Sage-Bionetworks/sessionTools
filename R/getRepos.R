@@ -1,6 +1,6 @@
 # Get the list of repositories to search for available R packages
 # 
-# Author: Matthew D. Furia
+# Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
 getRepos <- 
@@ -10,11 +10,12 @@ getRepos <-
 	repos <- tryCatch(
 			BiocInstaller::biocinstallRepos(),
 			error = function(e){
-				local({
+				suppressMessages(local({
 					source("http://bioconductor.org/biocLite.R")
-				})
+				}))
 				
 				repos <- BiocInstaller::biocinstallRepos()
+				unloadNamespace("BiocInstaller")
 				remove.packages("BiocInstaller")
 				repos
 			}

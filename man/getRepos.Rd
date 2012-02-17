@@ -11,9 +11,6 @@
 \usage{
 getRepos()
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
 \value{
 	A named list of repository URLs.
 }

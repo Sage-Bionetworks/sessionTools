@@ -1,6 +1,6 @@
 # Return session description
 # 
-# Author: Matthew D. Furia
+# Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
 describeSession <-

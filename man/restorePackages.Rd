@@ -29,9 +29,6 @@ restorePackages(sessionInfo, repos = getRepos(), warn = TRUE)
 	Boolean indicating whether a warning be displayed if not all packages can be installed.  
 }
 }
-\details{
-	
-}
 \value{
 	This method is executed for it's side-effects, which is to install packages to the default library.
 }

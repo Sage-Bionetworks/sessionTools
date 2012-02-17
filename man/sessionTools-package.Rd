@@ -3,10 +3,11 @@
 \alias{sessionTools}
 \docType{package}
 \title{
-What the package does (short line)
+Utilities for Saving and Restoring Sessions
 }
 \description{
-More about what it does (maybe more than one line)
+Contiains tools that can be used to save and restore R sessions. This includes
+objects, search paths, options and installed libraries.
 }
 \details{
 \tabular{ll}{
@@ -19,11 +20,8 @@ LazyLoad: \tab yes\cr
 }
 }
 \author{
-Who wrote it
+Matthew D. Furia <matt.furia@sagebase.org>
 
-Maintainer: Who to complain to <yourfault@somewhere.net>
+Maintainer: Matthew D. Furia <matt.furia@sagebase.org>
 }
-\references{
-}
-\examples{
-}
+

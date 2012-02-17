@@ -1,6 +1,6 @@
 # Restore the R options
 # 
-# Author: Matthew D. Furia
+# Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
 restoreOptions <-

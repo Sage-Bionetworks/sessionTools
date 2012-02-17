@@ -7,5 +7,7 @@ Author: Matthew D. Furia <matt.furia@sagebase.org>
 Maintainer: Matthew D. Furia <matt.furia@sagebase.org>
 Description: This package builds on the save.session function by making installed packages, options and searchpaths
 	saveable and restorable.
-License: GPL
+Suggests: RUnit
+Enhances: BiocInstaller
+License: GPL-2
 LazyLoad: yes

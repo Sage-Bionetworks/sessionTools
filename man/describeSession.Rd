@@ -9,22 +9,24 @@
 \usage{
 	describeSession()
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
-%% 
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+	A list containing the session information returned by sessionInfo() plus
+	the additional components listed below:
+	\item{search }{array of attached objects returned by a call to search()}
+	\item{searchpaths }{array of searchpaths returned by a call to searchpaths()}
+	\item{opts }{list containing the options returned by a call to options()}
 }
 \author{
 	Matthew D. Furia <matt.furia@saegebase.org>
 }
 
 \seealso{
-	\code{\link{restoreSession}}
+	\code{\link{restoreSession}},
+	\code{\link{sessionInfo}},
+	\code{\link{search}},
+	\code{\link{searchpaths}},
+	\code{\link{options}}
 }
 \examples{
 function () 

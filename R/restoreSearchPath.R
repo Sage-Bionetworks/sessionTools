@@ -1,6 +1,6 @@
 # Restore the user's search path
 # 
-# Author: Matthew D. Furia
+# Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
 restoreSearchPath <-
@@ -36,16 +36,16 @@ restoreSearchPath <-
 				if(name %in% search()){
 					detach(name, character.only = TRUE)
 				}
-				attach(get(obj, envir=envir), pos = ii, name=name, character.only = TRUE)
+				attach(get(obj, envir=envir), pos = ii, name=name)
 			}
 	)
 	
 	if(clean){
 		## detach objects that shouldn't be attached
-		indx <- which(!(search %in% info$search))
+		indx <- which(!(search %in% sessionInfo$search))
 		if(length(indx) > 0){
 			lapply(indx, function(ii){
-						name <- info$search[[ii]]
+						name <- sessionInfo$search[[ii]]
 						detach(name, character.only = TRUE)
 					}
 			)

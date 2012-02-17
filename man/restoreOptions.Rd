@@ -9,7 +9,6 @@
 \usage{
 restoreOptions(sessionInfo)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{sessionInfo}{
 	A valid sessionInfo object.

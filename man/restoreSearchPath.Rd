@@ -1,6 +1,5 @@
 \name{restoreSearchPath}
 \alias{restoreSearchPath}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 	Restore a Search Path
 }
@@ -11,7 +10,6 @@
 \usage{
 restoreSearchPath(sessionInfo, envir = .GlobalEnv, clean = TRUE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{sessionInfo}{
 	A sessionInfo object containing search path info
@@ -24,9 +22,6 @@ restoreSearchPath(sessionInfo, envir = .GlobalEnv, clean = TRUE)
 	Boolean indicating whether elements in current session's search path
 	that are not in the sessionInfo's search path should be removed.
 }
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
 }
 \value{
 	This method is executed for it's side-effects, which is a modified search path.

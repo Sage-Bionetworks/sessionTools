@@ -1,9 +1,9 @@
 # Check whether the packages are available in the repos
 # 
-# Author: Matthew D. Furia
+# Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
-isAvailable <- 
+isPkgAvailable <- 
 		function(pkg, repos = getOption("repos"), version)
 {
 		apkg <- data.frame(available.packages(contriburl = contrib.url(repos)), stringsAsFactors=FALSE)

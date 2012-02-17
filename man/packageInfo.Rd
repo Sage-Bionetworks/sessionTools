@@ -1,46 +1,44 @@
 \name{packageInfo}
 \alias{packageInfo}
 \title{
-	Some info
+	Extract Package Info
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+	Extracts package names and versions from the sessionInfo object.
 }
 \usage{
-packageInfo(sessionInfo = sessionInfo())
+	packageInfo(sessionInfo = sessionInfo())
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{sessionInfo}{
-%%     ~~Describe \code{sessionInfo} here~~
+	sessionInfo object from a call to \code{\link{sessionInfo}} or \code{\link{describeSession}}
 }
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+	A list containing the following elements:
+	\item{loadedOnly }{packages loaded via a namespace}
+	\item{otherPackages }{packages attached by a call to \code{library}}
+
+	Each element of the list contains a named list where the name is the package name and
+	the value is the package version.
 }
-\references{
-%% ~put references to the literature/web site here ~
+
+\details{
+	This method is intended to be used to get a listing of optional packages that are loaded in
+	the current session. Packages listed in the "otherPackages" component are optional packages that
+	were attached to the search path using a call to library. Packges listed in the "loadedOnly" 
+	component were imported into the namespace of one of the "otherPackages", but are not attached
+	to the search path.
 }
+
 \author{
-%%  ~~who you are~~
+	Matthew D. Furia <matt.furia@sagebase.org>
 }
-\note{
-%%  ~~further notes~~
-}
-
-
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+	\code{\link{sessionInfo}},
+	\code{\link{describeSession}}
 }
 \examples{
-
 ## The function is currently defined as
 function (sessionInfo = sessionInfo()) 
 {
