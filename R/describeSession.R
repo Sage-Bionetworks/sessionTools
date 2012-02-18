@@ -4,16 +4,16 @@
 ###############################################################################
 
 describeSession <-
-		function()
+    function()
 {
-	info <- sessionInfo()
-	info$search <- search()
-	info$searchpaths <- searchpaths()
-	info$opts <- options()
-	info
+  info <- sessionInfo()
+  info$search <- search()
+  info$searchpaths <- searchpaths()
+  info$opts <- options()
+  info
 }
 
 
 
 
-	
+

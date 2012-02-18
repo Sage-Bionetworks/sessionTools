@@ -1,32 +1,32 @@
 \name{restoreObjects}
 \alias{restoreObjects}
 \title{
-	Restore Session Objects
+Restore Session Objects
 }
 \description{
-	Restores the objects from an R binary file to the specified environment.
+Restores the objects from an R binary file to the specified environment.
 }
 \usage{
-	restoreObjects(file = "session.RData", envir = .GlobalEnv, clean = TRUE)
+restoreObjects(file = "session.RData", envir = .GlobalEnv, clean = TRUE)
 }
 \arguments{
   \item{file}{
-	path to an R binary file
+path to an R binary file
 }
   \item{envir}{
-	the environment into which the objects should be restored.
+the environment into which the objects should be restored.
 }
   \item{clean}{
-	boolean indicating whether the environment should be purged prior to restoring objects
+boolean indicating whether the environment should be purged prior to restoring objects
 }
 
 }
 
 \value{
-	This method is executed for it's side-effects.
+This method is executed for it's side-effects.
 }
 \author{
-	Matthew D. Furia <matt.furia@sagebase.org>
+Matthew D. Furia <matt.furia@sagebase.org>
 }
 
 \examples{

@@ -3,27 +3,26 @@
 # Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
-
 .setUp <-
-		function()
+    function()
 {
-	
+  
 }
 
 .tearDown <-
-		function()
+    function()
 {
-	
+  
 }
 
 unitTestRestore <-
-		function()
+    function()
 {
-	
+  
 }
 
 unitTestRestoreClean <-
-		function()
+    function()
 {
-	
+  
 }

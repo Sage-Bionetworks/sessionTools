@@ -4,8 +4,8 @@
 ###############################################################################
 
 isPkgAvailable <- 
-		function(pkg, repos = getOption("repos"), version)
+    function(pkg, repos = getOption("repos"), version)
 {
-		apkg <- data.frame(available.packages(contriburl = contrib.url(repos)), stringsAsFactors=FALSE)
-		pkg %in% apkg$Package
+  apkg <- data.frame(available.packages(contriburl = contrib.url(repos)), stringsAsFactors=FALSE)
+  pkg %in% apkg$Package
 }

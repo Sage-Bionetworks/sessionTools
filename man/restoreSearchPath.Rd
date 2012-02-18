@@ -1,41 +1,41 @@
 \name{restoreSearchPath}
 \alias{restoreSearchPath}
 \title{
-	Restore a Search Path
+Restore a Search Path
 }
 \description{
-	Set the current session's search path to be equal to the search path
-	described in the sessionInfo object.
+Set the current session's search path to be equal to the search path
+described in the sessionInfo object.
 }
 \usage{
 restoreSearchPath(sessionInfo, envir = .GlobalEnv, clean = TRUE)
 }
 \arguments{
   \item{sessionInfo}{
-	A sessionInfo object containing search path info
+A sessionInfo object containing search path info
 }
   \item{envir}{
-	Environment to search for non-package objects that are referenced
-	in the sessionInfo object.
+Environment to search for non-package objects that are referenced
+in the sessionInfo object.
 }
   \item{clean}{
-	Boolean indicating whether elements in current session's search path
-	that are not in the sessionInfo's search path should be removed.
+Boolean indicating whether elements in current session's search path
+that are not in the sessionInfo's search path should be removed.
 }
 }
 \value{
-	This method is executed for it's side-effects, which is a modified search path.
+This method is executed for it's side-effects, which is a modified search path.
 }
 \author{
-	Matthew D. Furia <matt.furia@sagebase.org>
+Matthew D. Furia <matt.furia@sagebase.org>
 }
 \note{
-	This function is somewhat experimental and so it might not be possible to restore
-	all search path elements.
+This function is somewhat experimental and so it might not be possible to restore
+all search path elements.
 }
 
 \seealso{
-	\code{\link{describeSession}}
+\code{\link{describeSession}}
 }
 \examples{
 ## The function is currently defined as

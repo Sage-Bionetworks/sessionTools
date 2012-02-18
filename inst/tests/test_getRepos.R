@@ -4,53 +4,51 @@
 ###############################################################################
 
 .setUp <-
-		function()
+    function()
 {
-	oldRepos <- getOption("repos")
-	save(oldRepos, file = file.path(tempdir(), "oldRepos.Rbin"))
+  oldRepos <- getOption("repos")
+  save(oldRepos, file = file.path(tempdir(), "oldRepos.Rbin"))
 }
 
 .tearDown <-
-		function()
+    function()
 {
-	load(file.path(tempdir(), "oldRepos.Rbin"))
-	options(oldRepos)
-	rm(oldRepos)
-	unlink(file.path(tempdir(), "oldRepos.Rbin"))
+  load(file.path(tempdir(), "oldRepos.Rbin"))
+  options(oldRepos)
+  rm(oldRepos)
+  unlink(file.path(tempdir(), "oldRepos.Rbin"))
 }
 
 unitTestGetReposCRANnotSet <-
-		function()
+    function()
 {
-	options(repos=c(CRAN="@CRAN@"))
-	repos <- getRepos()
-	
-	checkTrue(length(repos) > 1)
-	checkTrue(repos[["CRAN"]] != "@CRAN@")
-	checkEquals(getOption("repos")[["CRAN"]], "@CRAN@")
-	
+  options(repos=c(CRAN="@CRAN@"))
+  repos <- getRepos()
+  
+  checkTrue(length(repos) > 1)
+  checkTrue(repos[["CRAN"]] != "@CRAN@")
+  checkEquals(getOption("repos")[["CRAN"]], "@CRAN@")
 }
 
 unitTestGetReposCRANSet <-
-		function()
+    function()
 {
-	options(repos=c(CRAN="aFakeUrl"))
-	repos <- getRepos()
-	
-	checkEquals(length(repos[["CRAN"]]), 1L)
-	checkEquals(repos[["CRAN"]], "aFakeUrl")
-	checkEquals(getOption("repos")[["CRAN"]], "aFakeUrl")
+  options(repos=c(CRAN="aFakeUrl"))
+  repos <- getRepos()
+  
+  checkEquals(length(repos[["CRAN"]]), 1L)
+  checkEquals(repos[["CRAN"]], "aFakeUrl")
+  checkEquals(getOption("repos")[["CRAN"]], "aFakeUrl")
 }
 
 unitTestGetReposUserSetExtraRepos <-
-		function()
+    function()
 {
-	options(repos=c(CRAN="aFakeUrl", anotherOne="anotherFakeURL"))
-	repos <- getRepos()
-	
-	checkTrue(all(c("CRAN", "anotherOne") %in% names(getOption("repos"))))
-	checkEquals(length(repos[["CRAN"]]), 1L)
-	checkEquals("aFakeUrl", repos[["CRAN"]])
-	checkEquals("anotherFakeURL", repos[["anotherOne"]])	
+  options(repos=c(CRAN="aFakeUrl", anotherOne="anotherFakeURL"))
+  repos <- getRepos()
+  
+  checkTrue(all(c("CRAN", "anotherOne") %in% names(getOption("repos"))))
+  checkEquals(length(repos[["CRAN"]]), 1L)
+  checkEquals("aFakeUrl", repos[["CRAN"]])
+  checkEquals("anotherFakeURL", repos[["anotherOne"]])	
 }
-
