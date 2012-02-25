@@ -1,7 +1,7 @@
 Package: sessionTools
 Type: Package
 Title: Tools for saving, restoring and teleporting R sessions.
-Version: 0.1-0
+Version: 0.1-1
 Date: 2012-02-16
 Author: Matthew D. Furia <matt.furia@sagebase.org>
 Maintainer: Matthew D. Furia <matt.furia@sagebase.org>
