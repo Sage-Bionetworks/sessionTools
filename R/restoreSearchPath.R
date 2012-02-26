@@ -1,6 +1,6 @@
-# Restore the user's search path
-# 
-# Author: Matthew D. Furia <matt.furia@sagebase.org>
+## Restore the user's search path
+## 
+## Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
 restoreSearchPath <-

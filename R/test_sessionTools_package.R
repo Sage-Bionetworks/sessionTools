@@ -1,6 +1,6 @@
-# Function for running unit tests
-# 
-# Author: Matthew D. Furia <matt.furia@sagebase.org>
+## Function for running unit tests
+## 
+## Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
 .test <- function(dir=system.file("tests", package="sessionTools"), testFileRegexp = "^test_.*\\.R$") {

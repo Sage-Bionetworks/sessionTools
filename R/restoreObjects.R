@@ -1,6 +1,6 @@
-# Restore session objects
-# 
-# Author: Matthew D. Furia <matt.furia@sagebase.org>
+## Restore session objects
+## 
+## Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
 restoreObjects <-

@@ -1,6 +1,6 @@
-# Get the list of repositories to search for available R packages
-# 
-# Author: Matthew D. Furia <matt.furia@sagebase.org>
+## Get the list of repositories to search for available R packages
+## 
+## Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
 getRepos <- 

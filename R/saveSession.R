@@ -1,6 +1,6 @@
-# Save the current session
-# 
-# Author: Matthew D. Furia <matt.furia@sagebase.org>
+## Save the current session
+## 
+## Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
 saveSession <- 

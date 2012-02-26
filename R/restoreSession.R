@@ -1,6 +1,6 @@
-# Restore a session from a file
-# 
-# Author: Matthew D. Furia <matt.furia@sagebase.org>
+## Restore a session from a file
+## 
+## Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
 restoreSession <- 

@@ -1,6 +1,6 @@
-# Get information about the packages in the sessionInfo object
-# 
-# Author: Matthew D. Furia <matt.furia@sagebase.org>
+## Get information about the packages in the sessionInfo object
+## 
+## Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
 

@@ -1,6 +1,6 @@
-# Check whether the packages are available in the repos
-# 
-# Author: Matthew D. Furia <matt.furia@sagebase.org>
+## Check whether the packages are available in the repos
+## 
+## Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
 isPkgAvailable <- 
