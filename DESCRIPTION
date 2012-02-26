@@ -6,6 +6,7 @@ Date: 2012-02-16
 Author: Matthew D. Furia <matt.furia@sagebase.org>
 Maintainer: Matthew D. Furia <matt.furia@sagebase.org>
 Description: This package builds on the save.session function by making installed packages, options and searchpaths saveable and restorable.
+Depends: R (>= 2.13.0)
 Suggests: RUnit
 Enhances: BiocInstaller
 License: GPL-2
