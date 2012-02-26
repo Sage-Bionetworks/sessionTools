@@ -6,7 +6,7 @@
 saveSession <- 
     function(file="session.RData", ...)
 {
-  assign(".sessionInfo", describeSession(), envir = .GlobalEnv)
+  assign(".sessionInfo", sessionSummary(), envir = .GlobalEnv)
   save(list = ls(envir = .GlobalEnv, all.names = TRUE), file = file, ...)
 }
 

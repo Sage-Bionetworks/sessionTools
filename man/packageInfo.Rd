@@ -11,7 +11,7 @@ packageInfo(sessionInfo = sessionInfo())
 }
 \arguments{
   \item{sessionInfo}{
-sessionInfo object from a call to \code{\link{sessionInfo}} or \code{\link{describeSession}}
+sessionInfo object from a call to \code{\link{sessionInfo}} or \code{\link{sessionSummary}}
 }
 }
 \value{
@@ -36,7 +36,7 @@ Matthew D. Furia <matt.furia@sagebase.org>
 }
 \seealso{
 \code{\link{sessionInfo}},
-\code{\link{describeSession}}
+\code{\link{sessionSummary}}
 }
 \examples{
 ## The function is currently defined as

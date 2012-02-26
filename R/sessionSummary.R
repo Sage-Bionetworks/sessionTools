@@ -3,7 +3,7 @@
 # Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
-describeSession <-
+sessionSummary <-
     function()
 {
   info <- sessionInfo()

@@ -32,14 +32,14 @@ Matthew D. Furia <matt.furia@sagebase.org>
 
 \seealso{
 \code{\link{restoreSession}},
-\code{\link{describeSession}}
+\code{\link{sessionSummary}}
 }
 \examples{
 
 ## The function is currently defined as
 function (file = "session.RData", ...) 
 {
-    .sessionInfo <<- describeSession()
+    .sessionInfo <<- sessionSummary()
     save(list = ls(envir = .GlobalEnv, all.names = TRUE), file = file, 
         ...)
   }

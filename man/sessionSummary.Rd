@@ -1,5 +1,5 @@
-\name{describeSession}
-\alias{describeSession}
+\name{sessionSummary}
+\alias{sessionSummary}
 \title{
 Return a sessionInfo object
 }
@@ -7,7 +7,7 @@ Return a sessionInfo object
  Create a sessionInfo object that can be used to describe the current session.
 }
 \usage{
-describeSession()
+sessionSummary()
 }
 
 \value{

@@ -35,7 +35,7 @@ all search path elements.
 }
 
 \seealso{
-\code{\link{describeSession}}
+\code{\link{sessionSummary}}
 }
 \examples{
 ## The function is currently defined as
