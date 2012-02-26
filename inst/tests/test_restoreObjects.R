@@ -1,6 +1,6 @@
-# Test restoring objects
-# 
-# Author: Matthew D. Furia <matt.furia@sagebase.org>
+## Test restoring objects
+## 
+## Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
 .setUp <-

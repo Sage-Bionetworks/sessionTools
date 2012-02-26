@@ -1,6 +1,6 @@
-# Test getRepos
-# 
-# Author: Matthew D. Furia <matt.furia@sagebase.org>
+## Test getRepos
+## 
+## Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
 .setUp <-

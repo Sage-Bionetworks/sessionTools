@@ -1,6 +1,6 @@
-# unit tests for package availability function
-# 
-# Author: Matthew D. Furia <matt.furia@sagebase.org>
+## unit tests for package availability function
+## 
+## Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
 unitTestSinglePackageAvail <-

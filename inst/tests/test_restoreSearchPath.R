@@ -1,6 +1,6 @@
-# Tests for restoring search path
-# 
-# Author: Matthew D. Furia <matt.furia@sagebase.org>
+## Tests for restoring search path
+## 
+## Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
 .setUp <-

@@ -1,6 +1,6 @@
-# Unit tests for restoring R options
-# 
-# Author: Matthew D. Furia <matt.furia@sagebase.org>
+## Unit tests for restoring R options
+## 
+## Author: Matthew D. Furia <matt.furia@sagebase.org>
 ###############################################################################
 
 .setUp <-
