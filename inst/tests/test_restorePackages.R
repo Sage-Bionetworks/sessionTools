@@ -47,7 +47,7 @@
   repo <- tempfile()
   dir.create(repo, recursive=TRUE)
   repo <- normalizePath(repo)
-  .deployPackage(file.path(find.package("sessionTools"), "testData/helloWorld_1.0.tar.gz"), repo)
+  .deployPackage(system.file("testData/helloWorld_1.0.tar.gz", package="sessionTools"), repo)
   repo <- sprintf("file://%s", repo)
   save(repo, file= file.path(tempdir(), "repo.rbin"))
   if('helloWorld' %in% installed.packages()[,1])
@@ -73,7 +73,7 @@
   ## unload helloWorld and uninstall it
   unloadNamespace("helloWorld")
   checkTrue(!('helloWorld' %in% loadedNamespaces()))
-  suppressWarnings(remove.packages("helloWorld"))
+  remove.packages("helloWorld", lib = lib)
   checkTrue(!('helloWorld' %in% installed.packages()[,1]))
 }
 
@@ -128,5 +128,34 @@ unitTestNoMissingPackages <-
   info <- sessionInfo()
   restorePackages(info)
 }
+
+unitTestSinglePackageAvail <-
+  function()
+{
+  load(file= file.path(tempdir(), "repo.rbin"))
+  checkTrue(isPkgAvailable('helloWorld',repos = repo))
+}
+
+unitTestAttachPackageNotAvailable <-
+  function()
+{
+  ## install hello world
+  load(file= file.path(tempdir(), "repo.rbin"))
+  load(file.path(tempdir(), "lib.rbin"))
+  .libPaths(lib)
+  
+  ## install helloWorld so we can get sessionInfo
+  install.packages('helloWorld', repos = repo, lib = lib)
+  library('helloWorld')
+  
+  info <- sessionSummary()
+  unloadNamespace('helloWorld')
+  remove.packages('helloWorld', lib = lib)
+  checkTrue(!('helloWorld' %in% installed.packages()[,1]))
+  ans <- restoreSearchPath(info)
+  checkEquals(ans, character())
+  checkTrue(!('helloWorld' %in% installed.packages()[,1]))
+}
+
 
 

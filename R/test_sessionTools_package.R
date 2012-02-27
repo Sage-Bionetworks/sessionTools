@@ -7,6 +7,10 @@
   .runTestSuite(dir=dir, testFileRegexp=testFileRegexp, testFuncRegexp="^unitTest.+", suiteName="unit tests") 
 }
 
+.integrationTest <- function(dir=system.file("integrationTests", package="sessionTools"), testFileRegexp = "^test_.*\\.R$") {
+  .runTestSuite(dir=dir, testFileRegexp=testFileRegexp, testFuncRegexp="^integrationTest.+", suiteName="unit tests") 
+}
+
 .runTestSuite <- function(dir, testFileRegexp, testFuncRegexp, suiteName) {
   .failure_details <- function(result) {
     res <- result[[1L]]
