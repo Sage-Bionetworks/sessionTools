@@ -4,10 +4,10 @@
 ###############################################################################
 
 saveSession <- 
-    function(file="session.RData", ...)
+    function(..., list = character(), file="session.RData", version = NULL, envir = .GlobalEnv)
 {
-  assign(".sessionInfo", sessionSummary(), envir = .GlobalEnv)
-  save(list = ls(.GlobalEnv, all.names = TRUE), file = file, ...)
+  assign(".sessionInfo", sessionSummary(), envir = envir)
+  save(..., list = c(list, ".sessionInfo"), file = file, version = version, envir = envir)
 }
 
 

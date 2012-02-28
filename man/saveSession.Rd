@@ -6,16 +6,33 @@ Save an R Session
 \description{
 This function saves all objects in stored in the global workspace, and also
 saves the session info object that describes other information about the session.
+It is a thin wrapper on the save method.
 }
 \usage{
-saveSession(file = "session.RData", ...)
+saveSession(..., list = character(), file="session.RData", version = NULL, envir = .GlobalEnv)
 }
 \arguments{
-  \item{file}{
-File where the session should be stored
+\item{list}{
+A character vector containing the names of objects to be
+saved.
 }
-  \item{\dots}{
-Other arguments passed to save.
+\item{\dots}{
+the names of the objects to be saved (as symbols or character
+strings).
+}
+\item{file}{
+a (writable binary-mode) connection or the name of the file
+where the data will be saved (when tilde expansion is done).
+Must be a file name for Ôversion = 1Õ.
+}
+\item{version}{
+the workspace format version to use.  ÔNULLÕ specifies the
+current default format.  The version used from R 0.99.0 to R
+1.3.1 was version 1.  The default format as from R 1.4.0 is
+version 2.
+}
+\item{envir}{
+environment to search for objects to be saved.
 }
 }
 \details{
@@ -32,7 +49,8 @@ Matthew D. Furia <matt.furia@sagebase.org>
 
 \seealso{
 \code{\link{restoreSession}},
-\code{\link{sessionSummary}}
+\code{\link{sessionSummary}},
+\code{\link{save}}
 }
 \examples{
 
