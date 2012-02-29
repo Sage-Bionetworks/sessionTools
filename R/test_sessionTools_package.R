@@ -1,3 +1,5 @@
+## Copyright 2012 Sage Bionetworks.
+##
 ## Function for running unit tests
 ## 
 ## Author: Matthew D. Furia <matt.furia@sagebase.org>

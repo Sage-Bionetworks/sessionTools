@@ -1,3 +1,5 @@
+## Copyright 2012 Sage Bionetworks.
+##
 ## Restore a session from a file
 ## 
 ## Author: Matthew D. Furia <matt.furia@sagebase.org>

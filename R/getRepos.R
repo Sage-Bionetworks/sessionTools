@@ -1,3 +1,5 @@
+## Copyright 2012 Sage Bionetworks.
+##
 ## Get the list of repositories to search for available R packages
 ## 
 ## Author: Matthew D. Furia <matt.furia@sagebase.org>

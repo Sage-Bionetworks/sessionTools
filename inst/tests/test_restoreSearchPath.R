@@ -1,3 +1,5 @@
+## Copyright 2012 Sage Bionetworks.
+##
 ## Tests for restoring search path
 ## 
 ## Author: Matthew D. Furia <matt.furia@sagebase.org>

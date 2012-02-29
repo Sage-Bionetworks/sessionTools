@@ -1,3 +1,5 @@
+## Copyright 2012 Sage Bionetworks.
+##
 ## Tests for restoring packages
 ## 
 ## Author: Matthew D. Furia <matt.furia@sagebase.org>
@@ -25,13 +27,13 @@
     
     type <- switch(.Platform$pkgType,
       mac.binary.leopard = "mac.binary",
-      default = .Platform$pkgType
+      .Platform$pkgType
     )
     
     ext <- switch(type,
       mac.binary = "tgz",
       win.binary = "zip",
-      default = "tar.gz"
+      "tar.gz"
     )
     
     pkg <- gsub("tar.gz$", ext, pkg)

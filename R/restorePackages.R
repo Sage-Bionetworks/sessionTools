@@ -1,3 +1,5 @@
+## Copyright 2012 Sage Bionetworks.
+##
 ## Install any packages in the sessionInfo object that are not installed locally
 ## 
 ## Author: Matthew D. Furia <matt.furia@sagebase.org>

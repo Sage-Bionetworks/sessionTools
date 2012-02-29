@@ -1,3 +1,5 @@
+## Copyright 2012 Sage Bionetworks.
+##
 ## Test getRepos
 ## 
 ## Author: Matthew D. Furia <matt.furia@sagebase.org>

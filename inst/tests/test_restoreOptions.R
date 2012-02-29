@@ -1,3 +1,5 @@
+## Copyright 2012 Sage Bionetworks.
+##
 ## Unit tests for restoring R options
 ## 
 ## Author: Matthew D. Furia <matt.furia@sagebase.org>

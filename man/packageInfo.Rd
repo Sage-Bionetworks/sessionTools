@@ -32,24 +32,18 @@ to the search path.
 }
 
 \author{
-Matthew D. Furia <matt.furia@sagebase.org>
+Matthew D. Furia \email{matt.furia@sagebase.org}
+
+\url{https://github.com/MattNapsAlot}
 }
 \seealso{
 \code{\link{sessionInfo}},
 \code{\link{sessionSummary}}
 }
 \examples{
-## The function is currently defined as
-function (sessionInfo = sessionInfo()) 
-{
-    pkgs <- list()
-    pkgs$loadedOnly <- sapply(names(sessionInfo$loadedOnly), 
-        function(pkg) {
-            sessionInfo$loadedOnly[[pkg]]$Version
-        })
-    pkgs$otherPkgs <- sapply(names(sessionInfo$otherPkgs), function(pkg) {
-        sessionInfo$otherPkgs[[pkg]]$Version
-    })
-    pkgs
-  }
+info <- sessionInfo()
+pkg.info <- packageInfo(info)
+
+info <- sessionSummary()
+pkg.info <- packageInfo(info)
 }

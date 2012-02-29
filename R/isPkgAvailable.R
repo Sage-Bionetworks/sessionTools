@@ -1,3 +1,5 @@
+## Copyright 2012 Sage Bionetworks.
+##
 ## Check whether the packages are available in the repos
 ## 
 ## Author: Matthew D. Furia <matt.furia@sagebase.org>
