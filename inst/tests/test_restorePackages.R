@@ -50,7 +50,11 @@
   dir.create(repo, recursive=TRUE)
   repo <- normalizePath(repo)
   .deployPackage(system.file("testData/helloWorld_1.0.tar.gz", package="sessionTools"), repo)
-  repo <- sprintf("file://%s", repo)
+  if(.Platform$OS.type == "windows"){
+    repo <- sprintf("file:%s",repo)
+  }else{
+    repo <- sprintf("file://%s", repo)
+  }
   save(repo, file= file.path(tempdir(), "repo.rbin"))
   if('helloWorld' %in% installed.packages()[,1])
     stop("package 'helloWorld' already installed. please remove this package before running tests")
@@ -86,18 +90,17 @@
   if('helloWorld' %in% loadedNamespaces())
     unloadNamespace('helloWorld')
   
+  ## uninstall helloWorld if it's still attached/installed
+  if('helloWorld' %in% installed.packages()[,1])
+    suppressWarnings(remove.packages('helloWorld'))
+  
   ## put back the libPaths
   load(file= file.path(tempdir(), "lib.rbin"))
   .libPaths(setdiff(.libPaths(), lib))
-  unlink(lib, recursive = TRUE, force = TRUE)
   
   ## clean up the local repo
   load(file= file.path(tempdir(), "repo.rbin"))
   unlink(repo, recursive = TRUE, force = TRUE)
-  
-  ## uninstall helloWorld if it's still attached/installed
-  if('helloWorld' %in% installed.packages()[,1])
-    suppressWarnings(remove.packages('helloWorld'))
 }
 
 unitTestMissingPackage <-
@@ -117,7 +120,7 @@ unitTestMissingPackageNotAvailable <-
   function()
 {
   load(file.path(tempdir(), "info.rbin"))
-   
+  
   out <- tryCatch(restorePackages(info), warning=function(w) {return(w)}, error = function(e){stop(e)})
   checkTrue('warning' %in% class(out))
   ## checkTrue(grepl("Unable to install the following packages: helloWorld", as.character(out)))
