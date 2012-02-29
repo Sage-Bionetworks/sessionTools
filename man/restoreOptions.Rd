@@ -22,16 +22,20 @@ only "repos" is restored.
 This method is called for it's side-effect of setting option values.
 }
 \author{
-Matthew D. Furia <matt.furia@sagebase.org>
+Matthew D. Furia \email{matt.furia@sagebase.org}
+
+\url{https://github.com/MattNapsAlot}
 }
 
 \seealso{
 \code{\link{options}}
 }
 \examples{
-function (sessionInfo) 
-{
-    kOptions <- "repos"
-    options(sessionInfo$opts[kOptions])
-  }
+\dontrun{
+## get the session summary
+info <- sessionSummary()
+
+## restore options
+restoreOptions(info)
+}
 }

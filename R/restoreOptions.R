@@ -1,3 +1,5 @@
+## Copyright 2012 Sage Bionetworks.
+##
 ## Restore the R options
 ## 
 ## Author: Matthew D. Furia <matt.furia@sagebase.org>

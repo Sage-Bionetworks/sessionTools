@@ -27,7 +27,9 @@ that are not in the sessionInfo's search path should be removed.
 This method is executed for it's side-effects, which is a modified search path.
 }
 \author{
-Matthew D. Furia <matt.furia@sagebase.org>
+Matthew D. Furia \email{matt.furia@sagebase.org}
+
+\url{https://github.com/MattNapsAlot}
 }
 \note{
 This function is somewhat experimental and so it might not be possible to restore
@@ -38,41 +40,17 @@ all search path elements.
 \code{\link{sessionSummary}}
 }
 \examples{
-## The function is currently defined as
-function (sessionInfo, envir = .GlobalEnv, clean = TRUE) 
-{
-    if (is.null(sessionInfo$search)) 
-        invisible(NULL)
-    indx <- grep("^package:", sessionInfo$search)
-    lapply(indx, function(ii) {
-        name <- sessionInfo$search[[ii]]
-        if (name \%in\% search()) {
-            if (ii == which(search() == name)) 
-                return(NULL)
-            detach(name, character.only = TRUE)
-        }
-        pkgName <- gsub("^package:", "", name)
-        base::library(pkgName, pos = ii, character.only = TRUE)
-    })
-    indx <- grep("^[^package:]", sessionInfo$search)
-    lapply(indx, function(ii) {
-        name <- sessionInfo$search[[ii]]
-        obj <- sessionInfo$searchpaths[[ii]]
-        if (name \%in\% search()) {
-            detach(name, character.only = TRUE)
-        }
-        attach(get(obj, envir = envir), pos = ii, name = name, 
-            character.only = TRUE)
-    })
-    if (clean) {
-        indx <- which(!(search \%in\% info$search))
-        if (length(indx) > 0) {
-            lapply(indx, function(ii) {
-                name <- info$search[[ii]]
-                detach(name, character.only = TRUE)
-            })
-        }
-    }
-    invisible(NULL)
-  }
+\dontrun{
+## get the session info
+info <- sessionSummary()
+
+## save to a file
+save(info, file = "sessionInfo.rbin")
+
+## load the session info
+load("sessionInfo.rbin")
+
+## restore the search path
+restoreSearchPath(info)
+}
 }

@@ -1,3 +1,5 @@
+## Copyright 2012 Sage Bionetworks.
+##
 ## Get information about the packages in the sessionInfo object
 ## 
 ## Author: Matthew D. Furia <matt.furia@sagebase.org>

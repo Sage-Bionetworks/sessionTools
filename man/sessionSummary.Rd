@@ -18,7 +18,9 @@ the additional components listed below:
 \item{opts }{list containing the options returned by a call to options()}
 }
 \author{
-Matthew D. Furia <matt.furia@saegebase.org>
+Matthew D. Furia \email{matt.furia@sagebase.org}
+
+\url{https://github.com/MattNapsAlot}
 }
 
 \seealso{
@@ -29,12 +31,6 @@ Matthew D. Furia <matt.furia@saegebase.org>
 \code{\link{options}}
 }
 \examples{
-function () 
-{
-    info <- sessionInfo()
-    info$search <- search()
-    info$searchpaths <- searchpaths()
-    info$opts <- options()
-    info
-}
+## get a summary of the session
+sessionSummary
 }

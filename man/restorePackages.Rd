@@ -33,21 +33,21 @@ Boolean indicating whether a warning be displayed if not all packages can be ins
 This method is executed for it's side-effects, which is to install packages to the default library.
 }
 \author{
-Matthew D. Furia <matt.furia@sagebase.org>
+Matthew D. Furia \email{matt.furia@sagebase.org}
+
+\url{https://github.com/MattNapsAlot}
 }
 \examples{
+\dontrun{
+## get the session description
+info <- sessionSummary()
 
-## The function is currently defined as
-function (sessionInfo, repos = getRepos(), warn = TRUE) 
-{
-    packages <- packageInfo(sessionInfo)
-    installed <- installed.packages()[, 3]
-    missing <- setdiff(names(c(packages$loadedOnly, packages$otherPkgs)), 
-        names(installed))
-    mk <- isAvailable(missing)
-    if (warn && any(!mk)) 
-        warning("Unable to install the following packages: ", 
-            paste(missing[!mk], collapse = ", "))
-    install.packages(missing[mk], repos = repos)
-  }
+## save to a binary
+save(info, file="sessionInfo.rbin")
+
+## restore
+load(file = "sessionInfo.rbin")
+restorePackages(info)
+
+}
 }

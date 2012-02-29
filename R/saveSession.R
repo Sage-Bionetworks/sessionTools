@@ -1,3 +1,5 @@
+## Copyright 2012 Sage Bionetworks.
+##
 ## Save the current session
 ## 
 ## Author: Matthew D. Furia <matt.furia@sagebase.org>

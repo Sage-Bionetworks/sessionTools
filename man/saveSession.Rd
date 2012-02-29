@@ -23,10 +23,10 @@ strings).
 \item{file}{
 a (writable binary-mode) connection or the name of the file
 where the data will be saved (when tilde expansion is done).
-Must be a file name for Ôversion = 1Õ.
+Must be a file name for version = 1.
 }
 \item{version}{
-the workspace format version to use.  ÔNULLÕ specifies the
+the workspace format version to use.  NULL specifies the
 current default format.  The version used from R 0.99.0 to R
 1.3.1 was version 1.  The default format as from R 1.4.0 is
 version 2.
@@ -44,21 +44,18 @@ the sessionInfo object is first stored in the global environment as an object na
 This method is called for it's side-effects, which is a file storing the current session.
 }
 \author{
-Matthew D. Furia <matt.furia@sagebase.org>
-}
+Matthew D. Furia \email{matt.furia@sagebase.org}
 
+\url{https://github.com/MattNapsAlot}
+}
 \seealso{
 \code{\link{restoreSession}},
 \code{\link{sessionSummary}},
 \code{\link{save}}
 }
 \examples{
-
-## The function is currently defined as
-function (file = "session.RData", ...) 
-{
-    .sessionInfo <<- sessionSummary()
-    save(list = ls(envir = .GlobalEnv, all.names = TRUE), file = file, 
-        ...)
-  }
+\dontrun{
+## save the session for later use
+saveSession(file="sessionInfo.rbin")
+}
 }

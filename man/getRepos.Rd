@@ -1,7 +1,7 @@
 \name{getRepos}
 \alias{getRepos}
 \title{
-Get a List of Know Package Repositories
+Get a List of Known Package Repositories
 }
 \description{
 This package returns the urls to the currently know repositories. This includes
@@ -15,28 +15,13 @@ getRepos()
 A named list of repository URLs.
 }
 \author{
-Matthew D. Furia <matt.furia@sagebase.org>
+Matthew D. Furia \email{matt.furia@sagebase.org}
+
+\url{https://github.com/MattNapsAlot}
 }
 \examples{
-
-## The function is currently defined as
-function () 
-{
-    repos <- tryCatch(BiocInstaller::biocinstallRepos(), error = function(e) {
-        local({
-            source("http://bioconductor.org/biocLite.R")
-        })
-        repos <- BiocInstaller::biocinstallRepos()
-        remove.packages("BiocInstaller")
-        repos
-    })
-    nms <- setdiff(names(getOption("repos")), names(repos))
-    if (length(nms) > 0) 
-        repos <- c(repos, getOption("repos")[nms])
-    rVersion <- paste(R.Version()$major, as.integer(R.Version()$minor), 
-        sep = ".")
-    sageRepos <- paste("http://sage.fhcrc.org/CRAN/prod", rVersion, 
-        sep = "/")
-    repos <- c(repos, SageBio = sageRepos)
-  }
+## get the known repositories
+\dontrun{
+repos <- getRepos()
+}
 }
