@@ -100,7 +100,7 @@
     suppressWarnings(remove.packages('helloWorld'))
 }
 
-unitTestMissingPackage <-
+integrationTestMissingPackage <-
   function()
 {
   load(file.path(tempdir(), "info.rbin"))
@@ -113,7 +113,7 @@ unitTestMissingPackage <-
   
 }
 
-unitTestMissingPackageNotAvailable <-
+integrationTestMissingPackageNotAvailable <-
   function()
 {
   load(file.path(tempdir(), "info.rbin"))
@@ -124,21 +124,21 @@ unitTestMissingPackageNotAvailable <-
   
 }
 
-unitTestNoMissingPackages <-
+integrationTestNoMissingPackages <-
   function()
 {
   info <- sessionInfo()
   restorePackages(info)
 }
 
-unitTestSinglePackageAvail <-
+integrationTestSinglePackageAvail <-
   function()
 {
   load(file= file.path(tempdir(), "repo.rbin"))
   checkTrue(isPkgAvailable('helloWorld',repos = repo))
 }
 
-unitTestAttachPackageNotAvailable <-
+integrationTestAttachPackageNotAvailable <-
   function()
 {
   ## install hello world
