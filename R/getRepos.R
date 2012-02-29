@@ -6,26 +6,31 @@
 ###############################################################################
 
 getRepos <- 
-    function()
+  function()
 {	
   ## get the bioconductor repos
   repos <- tryCatch(
-      BiocInstaller::biocinstallRepos(),
-      error = function(e){
-        file <- file(tempfile(), open="wt")
-        sink(file, type="message")
-        tryCatch(
-            local(source("http://bioconductor.org/biocLite.R")),
-            finally={
-              sink()
-              unlink(file)
-            }
-        )
-        repos <- BiocInstaller::biocinstallRepos()
-        unloadNamespace("BiocInstaller")
-        remove.packages("BiocInstaller")
-        repos
-      }
+    BiocInstaller::biocinstallRepos(),
+    error = function(e){
+      file <- file(tempfile(), open="wt")
+      sink(file, type="message")
+      tryCatch(
+        local(source("http://bioconductor.org/biocLite.R")),
+        error = function(e){
+          return(getOption("repos"))
+        },
+        finally={
+          sink()
+          unlink(file)
+        }
+      )
+      repos <- tryCatch({BiocInstaller::biocinstallRepos()
+          unloadNamespace("BiocInstaller")
+          remove.packages("BiocInstaller")
+        },error = function(e){return(getOption("repos"))}
+      )
+      repos
+    }
   )
   
   ## add the users repo options	
