@@ -38,9 +38,6 @@
     ## create the deploy directory
     dir.create(contriburl, recursive = TRUE, showWarnings = FALSE)
 
-    ## build the package
-    devtools::build(pkg, path=contriburl, binary = TRUE)
-    
     ## remove the package from the library
     ## this is necessary since devtools::build does not
     ## allow you to specify the library in which to install
@@ -53,6 +50,15 @@
       .Platform$pkgType
     )
     
+    ## determine where build type is binary
+    binary <- switch(type,
+      source = FALSE,
+      TRUE
+    )
+
+    ## build the package
+    devtools::build(pkg, path=contriburl, binary = binary)   
+ 
     ## register the deployed package
     tools::write_PACKAGES(contriburl, type=type)
   }
