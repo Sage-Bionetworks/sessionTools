@@ -29,46 +29,53 @@
     ## will throw an error if the pkgDir does not exist
     pkg <- normalizePath(pkg)
     
-    if(!all(file.exists(pkg)))
-      stop("Not all packages exist")
+    if(!file.exists(pkg))
+      stop("package directory does not exist")
     
     ## generate the deploy directory
     contriburl <- contrib.url(repo)
     
     ## create the deploy directory
     dir.create(contriburl, recursive = TRUE, showWarnings = FALSE)
+
+    ## build the package
+    devtools::build(pkg, path=contriburl, binary = TRUE)
     
+    ## remove the package from the library
+    ## this is necessary since devtools::build does not
+    ## allow you to specify the library in which to install
+    ## when executing R CMD INSTALL --build
+    remove.packages("helloWorld", lib=.libPaths())
+        
+    ## get the package type
     type <- switch(.Platform$pkgType,
-      mac.binary.leopard = "mac.binary",
+      mac.binary.leopard="mac.binary",
       .Platform$pkgType
     )
     
-    ext <- switch(type,
-      mac.binary = "tgz",
-      win.binary = "zip",
-      "tar.gz"
-    )
-    
-    pkg <- gsub("tar.gz$", ext, pkg)
-    
-    ## move the packages into place
-    file.copy(pkg, contriburl)
-    
     ## register the deployed package
-    tools::write_PACKAGES(contriburl, type = type)
+    tools::write_PACKAGES(contriburl, type=type)
   }
+  
+  ## make sure that helloWorld is not already installed
+  if('helloWorld' %in% installed.packages()[,1])
+    stop("package 'helloWorld' already installed. please remove this package before running tests")
   
   ## set up the local repository
   repo <- tempfile()
   dir.create(repo, recursive=TRUE)
   repo <- normalizePath(repo)
-  .deployPackage(system.file("testData/helloWorld_1.0.tar.gz", package="sessionTools"), repo)
+  .deployPackage(system.file("testData/helloWorld", package="sessionTools"), repo)
+  
+  ## convert repo path to a url
   if(.Platform$OS.type == "windows"){
     repo <- sprintf("file:%s",repo)
   }else{
     repo <- sprintf("file://%s", repo)
   }
   save(repo, file= file.path(tempdir(), "repo.rbin"))
+  
+  ## make sure that helloWorld is not already installed
   if('helloWorld' %in% installed.packages()[,1])
     stop("package 'helloWorld' already installed. please remove this package before running tests")
   
@@ -105,7 +112,7 @@
   
   ## uninstall helloWorld if it's still attached/installed
   if('helloWorld' %in% installed.packages()[,1])
-    suppressWarnings(remove.packages('helloWorld'))
+    remove.packages('helloWorld', lib=.libPaths())
   
   ## put back the libPaths
   load(file= file.path(tempdir(), "lib.rbin"))
