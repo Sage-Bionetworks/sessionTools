@@ -1,6 +1,4 @@
 ## Copyright (C) 2012  Sage Bionetworks <www.sagebase.org>
-##
-## Copyright (C) 2012  Sage Bionetworks <www.sagebase.org>
 ## 
 ## filename: test_getRepos.R
 ## description: Test getRepos method.
