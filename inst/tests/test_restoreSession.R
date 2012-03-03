@@ -6,7 +6,7 @@
 ##
 ## This file is part of the sessionTools R package.
 ##
-## sessionTools is free software: provided the Funding Acknolegement (below)
+## sessionTools is free software: provided the Funding Acknolegement
 ## is maintained, you can redistribute it and/or modify it under the terms of 
 ## the GNU LGPL-3, either version 3 of the License, or (at your option) any 
 ## later version. For details visit <http://www.gnu.org/licenses/>.
