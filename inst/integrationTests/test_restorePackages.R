@@ -38,12 +38,6 @@
     ## create the deploy directory
     dir.create(contriburl, recursive = TRUE, showWarnings = FALSE)
 
-    ## remove the package from the library
-    ## this is necessary since devtools::build does not
-    ## allow you to specify the library in which to install
-    ## when executing R CMD INSTALL --build
-    remove.packages("helloWorld", lib=.libPaths())
-        
     ## get the package type
     type <- switch(.Platform$pkgType,
       mac.binary.leopard="mac.binary",
@@ -58,6 +52,13 @@
 
     ## build the package
     devtools::build(pkg, path=contriburl, binary = binary)   
+
+    ## remove the package from the library
+    ## this is necessary since devtools::build does not
+    ## allow you to specify the library in which to install
+    ## when executing R CMD INSTALL --build
+    if(binary)
+      remove.packages("helloWorld", lib=.libPaths())
  
     ## register the deployed package
     tools::write_PACKAGES(contriburl, type=type)
