@@ -26,6 +26,13 @@ restoreObjects <-
       rm(list = names, envir = envir)
   }
   
+  tmpenv <- new.env()
+  
   ## load the r objects
-  load(file, envir = envir)
+  load(file, envir = tmpenv)
+  
+  for(c in getClasses(tmpenv))
+    removeClass(c, where = tmpenv)
+  
+  lapply(objects(tmpenv, all.names=TRUE), function(o) assign(o, get(o, envir=tmpenv) , envir=envir))
 }
