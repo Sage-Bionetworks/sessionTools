@@ -24,6 +24,9 @@ restoreSession <-
   ## restore objects
   restoreObjects(file, envir, clean)
   
+  ## restore class definitions
+  restoreClassDefinitions(file, envir, clean)
+  
   if(!exists(".sessionInfo", envir = envir))
     invisible(NULL)
   

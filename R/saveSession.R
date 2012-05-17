@@ -18,10 +18,31 @@
 ###############################################################################
 
 saveSession <- 
-    function(..., list = character(), file="session.RData", version = NULL, envir = .GlobalEnv)
-{
+  function(..., list = character(), file="session.RData", version = NULL, envir = .GlobalEnv)
+{  
+  if(length(as.list(substitute(list(...)))[-1L]) == 0L && length(list) == 0L){
+    list = ls(envir)
+    classes <- NULL
+    for(cc in getClasses(envir))
+      classes <- c(classes, classMetaName(cc))
+    list <- c(list, classes)
+  }else{
+    list <- unique(c(list, as.character(as.list(substitute(list(...)))[-1L])))
+    
+    classes <- intersect(getClasses(envir), list)
+    
+    indx <- which(classes %in% ls(envir, all.names = TRUE))
+    if(length(indx) != 0L){
+      warning(sprintf("The following class names were masked by objects in the environement and so were not saved: %s", paste(classes[indx], collapse=",")), call.= FALSE)
+      classes <- classes[-indx]
+    }
+      
+      indx <- which(list %in% classes)
+      for(ii in indx)
+          list[ii] <- classMetaName(list[ii]) 
+  }
   assign(".sessionInfo", sessionSummary(), envir = envir)
-  save(..., list = c(list, ".sessionInfo"), file = file, version = version, envir = envir)
+  save(list = c(list, ".sessionInfo"), file = file, version = version, envir = envir)
 }
 
 
