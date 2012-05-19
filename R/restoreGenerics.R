@@ -1,7 +1,7 @@
 ## Copyright (C) 2012  Sage Bionetworks <www.sagebase.org>
 ##
-## filename: restoreObjects.R
-## description: Restore session objects
+## filename: restoreGenerics.R
+## description: restore Generic functions.
 ## author: Matthew D. Furia <matt.furia@sagebase.org>
 ##
 ## This file is part of the sessionTools R package.
@@ -17,37 +17,25 @@
 ## Fund Program Grant 3104672 to Sage Bionetworks.
 ###############################################################################
 
-restoreObjects <-
+restoreGenerics <-
   function(file="session.RData", envir=.GlobalEnv, clean = TRUE)
 {
   if(clean){
-    names <- ls(all.names=TRUE, envir = envir)
-    if(length(names) > 0)
-      rm(list = names, envir = envir)
+    gg <- getGenerics(envir)
+    for(g in gg@.Data)
+      removeGeneric(g, where = envir)
   }
   
   tmpenv <- new.env()
   
-  ## load the r objects
+  ## load the r objects into a temporary environment
   load(file, envir = tmpenv)
-  
-  for(c in getClasses(tmpenv))
-    removeClass(c, where = tmpenv)
-  
+
   ans <- getGenerics(where = tmpenv)
-  if(length(ans@.Data) > 0L){
-    for(i in 1:length(ans@.Data)){
-      setPackageName(ans@package[i], tmpenv)
-      g <- ans@.Data[i]
-      for(ss in names(findMethods(g, where=tmpenv)))
-        removeMethod(g, ss, where = tmpenv)
-      rm(".packageName", envir=tmpenv)
-    }
+  for(g in ans@.Data){
+    gg <- getGeneric(g, where = tmpenv)
+    setPackageName(attr(gg, "package"), env=envir)
+    setGeneric(as.character(gg@generic), where=envir, package=gg@package, group=gg@group, def=gg@.Data, signature=gg@signature, valueClass=gg@valueClass, useAsDefault=gg@default)
+    rm(".packageName", envir=envir)
   }
-  
-  ans <- getGenerics(where = tmpenv)
-  for(g in ans@.Data)
-    removeGeneric(g, where = tmpenv)
-  
-  ans <- lapply(objects(tmpenv, all.names=TRUE), function(o) assign(o, get(o, envir=tmpenv) , envir=envir))
 }
