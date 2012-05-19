@@ -18,7 +18,7 @@
 ###############################################################################
 
 restoreObjects <-
-    function(file="session.RData", envir=.GlobalEnv, clean = TRUE)
+  function(file="session.RData", envir=.GlobalEnv, clean = TRUE)
 {
   if(clean){
     names <- ls(all.names=TRUE, envir = envir)
@@ -34,5 +34,18 @@ restoreObjects <-
   for(c in getClasses(tmpenv))
     removeClass(c, where = tmpenv)
   
-  lapply(objects(tmpenv, all.names=TRUE), function(o) assign(o, get(o, envir=tmpenv) , envir=envir))
+  ans <- getGenerics(where = tmpenv)
+  for(i in 1:length(ans@.Data)){
+    setPackageName(ans@package[i], tmpenv)
+    g <- ans@.Data[i]
+    for(ss in names(findMethods(g, where=tmpenv)))
+      removeMethod(g, ss, where = tmpenv)
+    rm(".packageName", envir=tmpenv)
+  }
+  
+  ans <- getGenerics(where = tmpenv)
+  for(g in ans@.Data)
+    removeGeneric(g, where = tmpenv)
+  
+  ans <- lapply(objects(tmpenv, all.names=TRUE), function(o) assign(o, get(o, envir=tmpenv) , envir=envir))
 }
