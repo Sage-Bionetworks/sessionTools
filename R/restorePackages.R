@@ -28,7 +28,10 @@ restorePackages <-
   installed <- installed.packages()[,3]
   
   ## determing the packages that are missng
-  missing <- setdiff(names(c(packages$loadedOnly, packages$otherPkgs)), names(installed)) 
+  missing <- setdiff(names(c(packages$loadedOnly, packages$otherPkgs)), names(installed))
+  
+  ## determine packages whose versions don't match
+  badVersion <-  
   
   mk <- isPkgAvailable(missing, repos = repos)
   if(warn && any(!mk))

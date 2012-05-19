@@ -60,7 +60,7 @@
       remove.packages("helloWorld", lib=.libPaths())
  
     ## register the deployed package
-    tools::write_PACKAGES(contriburl, type=type)
+    tools::write_PACKAGES(contriburl, type=type, latestOnly=FALSE)
   }
   
   ## make sure that helloWorld is not already installed
@@ -71,7 +71,8 @@
   repo <- tempfile()
   dir.create(repo, recursive=TRUE)
   repo <- normalizePath(repo)
-  .deployPackage(system.file("testData/helloWorld", package="sessionTools"), repo)
+  .deployPackage(system.file("testData/helloWorld_1.0", package="sessionTools"), repo)
+  .deployPackage(system.file("testData/helloWorld_0.9", package="sessionTools"), repo)
   
   ## convert repo path to a url
   if(.Platform$OS.type == "windows"){
@@ -188,5 +189,11 @@ integrationTestAttachPackageNotAvailable <-
   checkTrue(!('helloWorld' %in% installed.packages()[,1]))
 }
 
+integrationTestRestorePackagesBadVersion <-
+  function()
+{
+  
+  
+}
 
 
