@@ -1,5 +1,5 @@
-\name{restoreClassDefinitions}
-\alias{restoreClassDefinitions}
+\name{restoreS4Methods}
+\alias{restoreS4Methods}
 \title{
 Restore Session Class Definitions
 }
@@ -7,7 +7,7 @@ Restore Session Class Definitions
 Restores the class definitions from an R binary file to the specified environment.
 }
 \usage{
-restoreClassDefinitions(file = "session.RData", envir = .GlobalEnv, clean = TRUE, srcEnv)
+restoreS4Methods(file = "session.RData", envir = .GlobalEnv, clean = TRUE, srcEnv)
 }
 \arguments{
 \item{file}{
@@ -20,7 +20,7 @@ the environment into which the class definitions should be restored.
 boolean indicating whether the environment should be purged of existing class definitions prior to restoring
 }
 \item{srcEnv}{
-environment from which to restore class definitions. if this argument is provided the "file" arguments is ignored.
+environment from which to restore generics. if this argument is provided the "file" arguments is ignored.
 }
 }
 
@@ -34,9 +34,9 @@ Matthew D. Furia \email{matt.furia@sagebase.org}
 }
 
 \examples{
-## make some objects
-aMatrix <- diag(10)
-letters <- c("a", "b", "c")
+## make some methods
+setGeneric("foo", def = function(bar) standardGeneric("foo"))
+setMethod("foo", definition = function(bar) print(foo))
 
 ## save the session
 sessionFile <- tempfile(fileext=".rbin")
@@ -45,14 +45,9 @@ saveSession(list = ls(), file = sessionFile)
 ## create an environment where they can be restored
 env <- new.env()
 
-## define an S4 class
-setClass("foo", where = env)
+## restore the generic
+restoreS4Methods(file = sessionFile, envir = env)
+getGenerics(env)
+findMethods("foo", where=env)
 
-## restore the objects leaving "goo"
-restoreClassDefinitions(file = sessionFile, envir = env, clean = FALSE)
-ls(env)
-
-## restore the objects again, this time delete all objects from env first
-restoreClassDefinitions(file = sessionFile, envir = env, clean = TRUE)
-ls(env)
 }
