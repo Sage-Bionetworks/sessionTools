@@ -5,7 +5,7 @@
 
 
 restoreClassDefinitions <-
-  function(file="session.RData", envir=.GlobalEnv, clean = TRUE)
+  function(file="session.RData", envir=.GlobalEnv, clean = TRUE, srcEnv)
 {
   if(clean){
     names <- getClasses(envir)
@@ -13,16 +13,13 @@ restoreClassDefinitions <-
       removeClass(n, where = envir)
   }
   
-  tmpenv <- new.env()
+  if(missing(srcEnv)){
+    srcEnv <- new.env()
+    ## load the r objects
+    load(file, envir = srcEnv)
+  }
   
-  ## load the r objects
-  load(file, envir = tmpenv)
+  for(c in getClasses(srcEnv))
+    assign(classMetaName(c), get(classMetaName(c), envir=srcEnv), envir = envir)
   
-  metaNames <- NULL
-  for(c in getClasses(tmpenv))
-    metaNames <- c(metaNames, classMetaName(c))
-  
-  rm(list=setdiff(objects(tmpenv, all.names=TRUE), metaNames), envir=tmpenv)
-  
-  ans <- lapply(objects(tmpenv, all.names=TRUE), function(o) assign(o, get(o, envir=tmpenv) , envir=envir))
 }

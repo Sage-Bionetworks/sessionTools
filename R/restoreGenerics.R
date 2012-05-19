@@ -18,7 +18,7 @@
 ###############################################################################
 
 restoreGenerics <-
-  function(file="session.RData", envir=.GlobalEnv, clean = TRUE)
+  function(file="session.RData", envir=.GlobalEnv, clean = TRUE, srcEnv)
 {
   if(clean){
     gg <- getGenerics(envir)
@@ -26,14 +26,15 @@ restoreGenerics <-
       removeGeneric(g, where = envir)
   }
   
-  tmpenv <- new.env()
+  if(missing(srcEnv)){
+    srcEnv <- new.env()
+    ## load the r objects
+    load(file, envir = srcEnv)
+  }
   
-  ## load the r objects into a temporary environment
-  load(file, envir = tmpenv)
-
-  ans <- getGenerics(where = tmpenv)
+  ans <- getGenerics(where = srcEnv)
   for(g in ans@.Data){
-    gg <- getGeneric(g, where = tmpenv)
+    gg <- getGeneric(g, where = srcEnv)
     setPackageName(attr(gg, "package"), env=envir)
     setGeneric(as.character(gg@generic), where=envir, package=gg@package, group=gg@group, def=gg@.Data, signature=gg@signature, valueClass=gg@valueClass, useAsDefault=gg@default)
     rm(".packageName", envir=envir)

@@ -20,17 +20,23 @@
 restoreSession <- 
     function(file="session.RData", envir=.GlobalEnv, clean = TRUE)
 {
+  srcEnv <- new.env()
+  load(file, envir=srcEnv)
   
   ## restore objects
-  restoreObjects(file, envir, clean)
+  restoreObjects(file, envir=envir, clean=clean)
   
   ## restore class definitions
-  restoreClassDefinitions(file, envir, clean)
+  restoreClassDefinitions(srcEnv = srcEnv, envir = envir, clean = clean)
   
-  if(!exists(".sessionInfo", envir = envir))
+  ## restore S4 classes and generics
+  restoreGenerics(srcEnv = srcEnv, envir = envir, clean = clean)
+  restoreS4Methods(srcEnv = srcEnv, envir = envir, clean = clean)
+  
+  if(!exists(".sessionInfo", envir = srcEnv))
     invisible(NULL)
   
-  sessionInfo <- get(".sessionInfo", envir = envir)
+  sessionInfo <- get(".sessionInfo", envir = srcEnv)
   
   ## set the users options
   restoreOptions(sessionInfo)

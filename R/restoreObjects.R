@@ -19,35 +19,34 @@
 
 restoreObjects <-
   function(file="session.RData", envir=.GlobalEnv, clean = TRUE)
-{
+{  
   if(clean){
     names <- ls(all.names=TRUE, envir = envir)
     if(length(names) > 0)
       rm(list = names, envir = envir)
   }
   
-  tmpenv <- new.env()
-  
+  srcEnv <- new.env()
   ## load the r objects
-  load(file, envir = tmpenv)
+  load(file, envir = srcEnv)
   
-  for(c in getClasses(tmpenv))
-    removeClass(c, where = tmpenv)
+  for(c in getClasses(srcEnv))
+    removeClass(c, where = srcEnv)
   
-  ans <- getGenerics(where = tmpenv)
+  ans <- getGenerics(where = srcEnv)
   if(length(ans@.Data) > 0L){
     for(i in 1:length(ans@.Data)){
-      setPackageName(ans@package[i], tmpenv)
+      setPackageName(ans@package[i], srcEnv)
       g <- ans@.Data[i]
-      for(ss in names(findMethods(g, where=tmpenv)))
-        removeMethod(g, ss, where = tmpenv)
-      rm(".packageName", envir=tmpenv)
+      for(ss in names(findMethods(g, where=srcEnv)))
+        removeMethod(g, ss, where = srcEnv)
+      rm(".packageName", envir=srcEnv)
     }
   }
   
-  ans <- getGenerics(where = tmpenv)
+  ans <- getGenerics(where = srcEnv)
   for(g in ans@.Data)
-    removeGeneric(g, where = tmpenv)
+    removeGeneric(g, where = srcEnv)
   
-  ans <- lapply(objects(tmpenv, all.names=TRUE), function(o) assign(o, get(o, envir=tmpenv) , envir=envir))
+  ans <- lapply(objects(srcEnv, all.names=TRUE), function(o) assign(o, get(o, envir=srcEnv) , envir=envir))
 }

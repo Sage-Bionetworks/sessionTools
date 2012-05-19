@@ -18,7 +18,7 @@
 ###############################################################################
 
 restoreS4Methods <-
-  function(file="session.RData", envir=.GlobalEnv, clean = TRUE)
+  function(file="session.RData", envir=.GlobalEnv, clean = TRUE, srcEnv)
 {
   if(clean){
     ans <- getGenerics(where = envir)
@@ -34,27 +34,28 @@ restoreS4Methods <-
     }
   }
   
-  tmpenv <- new.env()
-  
-  ## load the r objects into a temporary environment
-  load(file, envir = tmpenv)
+  if(missing(srcEnv)){
+    srcEnv <- new.env()
+    ## load the r objects
+    load(file, envir = srcEnv)
+  }
   
   ## restore generics first
-  ans <- getGenerics(where = tmpenv)
+  ans <- getGenerics(where = srcEnv)
   for(g in ans@.Data){
-    gg <- getGeneric(g, where = tmpenv)
+    gg <- getGeneric(g, where = srcEnv)
     setPackageName(attr(gg, "package"), env=envir)
     setGeneric(as.character(gg@generic), where=envir, package=gg@package, group=gg@group, def=gg@.Data, signature=gg@signature, valueClass=gg@valueClass, useAsDefault=gg@default)
     rm(".packageName", envir=envir)
   }
   
-  ans <- getGenerics(where = tmpenv)
+  ans <- getGenerics(where = srcEnv)
   if(length(ans@.Data) > 0L){
     for(i in 1:length(ans@.Data)){
       setPackageName(ans@package[i], envir)
       g <- ans@.Data[i]
-      for(ss in names(findMethods(g, where=tmpenv))){
-        mm <- getMethod(g, ss, where = tmpenv)
+      for(ss in names(findMethods(g, where=srcEnv))){
+        mm <- getMethod(g, ss, where = srcEnv)
         setMethod(f = as.character(mm@generic), signature = mm@target, definition = mm@.Data, where = envir)
       }
       rm(".packageName", envir=envir)
